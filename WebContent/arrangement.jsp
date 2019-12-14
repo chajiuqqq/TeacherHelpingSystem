@@ -7,7 +7,7 @@
 <title>一周课程安排</title>
 
 <script src="jquery-1.10.2.min.js"></script>
-
+   
 
 <style>
 	.main_table{
