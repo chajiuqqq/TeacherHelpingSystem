@@ -12,7 +12,6 @@
 <style>
 	.main_table{
 		border-collapse:collapse;
-		width:800px;
 		height:800px;
 	}
 	.main_table td{
@@ -20,6 +19,8 @@
 		min-width:20px;
 		white-space:pre-line;
 		text-align:center;
+		width:100px;
+		height:80px;
 	}
 	
 	#div_available_teacher{
@@ -70,6 +71,12 @@
 			<td id="Sat_2"></td>
 		</tr>
 		<tr>
+			<td colspan="7">中午</td>
+		</tr>
+		
+		
+		
+		<tr>
 			<td id="Sun_3"></td>
 			<td id="Mon_3"></td>
 			<td id="Tues_3"></td>
@@ -118,7 +125,7 @@
 						for(i in ts_list){
 							var current_td=$("td[id="+ts_list[i].period+"]");
 							current_td.css("background-color","skyblue");
-							current_td.html(ts_list[i].tName+"\n"+ts_list[i].sName+"\n"+ts_list[i].position+"\n"+ts_list[i].period);
+							current_td.html("<div>"+ts_list[i].tName+"\n"+ts_list[i].sName+"\n"+ts_list[i].position+"\n"+ts_list[i].period+"</div>");
 							current_td.attr("TS_id",ts_list[i].id);
 							console.log(current_td.attr("TS_id"));
 						}
@@ -158,7 +165,10 @@
 					console.log(teachers);
 					if(teachers.length!=0){
 						for(i in teachers){
-							$("#table_available_teacher").append("<tr><td>"+teachers[i].name+"</td></tr>");
+							var str="<tr><td>"+teachers[i].name+"</td>";
+							str+="<td><a href='submitExchange?tno="+teachers[i].tno+"'><button>请求代课</button></a></td></tr>"
+							$("#table_available_teacher").append(str);
+							
 						}
 					}else{
 						$("#table_available_teacher").append("<strong>无</strong>");
