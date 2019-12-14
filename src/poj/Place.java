@@ -32,4 +32,7 @@ public class Place {
 	public void setPosition(String position) {
 		this.position = position;
 	}
+	public void F() {
+		System.out.println("asdd");
+	}
 }
