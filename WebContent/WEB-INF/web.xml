@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app>
+	
+	<servlet>
+		<servlet-name>Arrangement</servlet-name>
+		<servlet-class>ser.Arrangement</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Arrangement</servlet-name>
+		<url-pattern>/arrangement</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GetAvailableTeacher</servlet-name>
+		<servlet-class>ser.GetAvailableTeacher</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetAvailableTeacher</servlet-name>
+		<url-pattern>/getAvailableTeacher</url-pattern>
+	</servlet-mapping>
+</web-app>
