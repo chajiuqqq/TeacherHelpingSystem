@@ -19,4 +19,13 @@
 		<servlet-name>GetAvailableTeacher</servlet-name>
 		<url-pattern>/getAvailableTeacher</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DealLogin</servlet-name>
+		<servlet-class>ser.DealLogin</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DealLogin</servlet-name>
+		<url-pattern>/deal_login</url-pattern>
+	</servlet-mapping>
 </web-app>

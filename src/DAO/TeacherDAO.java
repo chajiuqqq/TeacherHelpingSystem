@@ -1,5 +1,6 @@
 package DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import org.hibernate.classic.Session;
 
 import poj.Subject;
 import poj.Teacher;
+import poj.Teacher_Subject;
 
 public class TeacherDAO {
 	public static void addTeacher(Teacher t) {
@@ -42,7 +44,27 @@ public class TeacherDAO {
 		sf.close();
 		return teacher.getSubjects();
 	}
+	public static boolean checkUser(String username,String password) {
+		SessionFactory sf=new Configuration().configure().buildSessionFactory();
+		Session s=sf.openSession();
+		s.beginTransaction();
+		
+		String sql="select * from teacher a where a.username=:username and a.password=:password";
+		SQLQuery query=s.createSQLQuery(sql);
+		query.setParameter("username", username);
+		query.setParameter("password", password);
 	
+		List<Object[]> list=query.list();
+		
+		s.getTransaction().commit();
+		s.close();
+		sf.close();
+		if(list.size()!=0){
+			return true;
+		}else{
+			return false;
+		}
+	}
 
 	
 	

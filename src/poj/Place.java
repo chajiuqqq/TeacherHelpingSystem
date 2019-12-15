@@ -32,8 +32,5 @@ public class Place {
 	public void setPosition(String position) {
 		this.position = position;
 	}
-	//sass
-	public void F() {
-		System.out.println("dd");
-	}
+	
 }

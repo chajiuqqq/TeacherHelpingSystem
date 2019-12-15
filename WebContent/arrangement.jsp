@@ -151,6 +151,9 @@
 		$('td').click(function(){
 			var current=$(this);
 			var ts_id=current.attr("TS_id");
+			$("#table_available_teacher").empty();
+			$("#div_available_teacher").slideUp(500);
+			
 			$.get(
 				"getAvailableTeacher",
 				{"TS_id":ts_id},
@@ -166,7 +169,7 @@
 					if(teachers.length!=0){
 						for(i in teachers){
 							var str="<tr><td>"+teachers[i].name+"</td>";
-							str+="<td><a href='submitExchange?tno="+teachers[i].tno+"'><button>请求代课</button></a></td></tr>"
+							str+="<td><a href='submitRequest?tno="+teachers[i].tno+"&current_ts="+ts_id+"'><button>请求代课</button></a></td></tr>"
 							$("#table_available_teacher").append(str);
 							
 						}
@@ -180,10 +183,7 @@
 			);
 
 		});
-		$('td').mouseleave(function(){
-			$("#div_available_teacher").slideUp(500);
-			$("#table_available_teacher").empty();
-		});
+		
 		
 	});
 </script>
