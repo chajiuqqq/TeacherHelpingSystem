@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
 
+import javassist.compiler.ast.Pair;
 import poj.Subject;
 import poj.Teacher;
 import poj.Teacher_Subject;
@@ -44,7 +45,7 @@ public class TeacherDAO {
 //		sf.close();
 //		return teacher.getSubjects();
 //	}
-	public static boolean checkUser(String username,String password) {
+	public static Teacher getTeacherObj(String username,String password) {
 		SessionFactory sf=new Configuration().configure().buildSessionFactory();
 		Session s=sf.openSession();
 		s.beginTransaction();
@@ -55,15 +56,13 @@ public class TeacherDAO {
 		query.setParameter("password", password);
 	
 		List<Object[]> list=query.list();
+		Teacher teacher=(Teacher)s.get(Teacher.class, (int)list.get(0)[0]);
+		
 		
 		s.getTransaction().commit();
 		s.close();
 		sf.close();
-		if(list.size()!=0){
-			return true;
-		}else{
-			return false;
-		}
+		return teacher;
 	}
 
 	

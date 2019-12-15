@@ -32,6 +32,13 @@ public class Teacher {
 	@JoinColumn(name="tid")
 	Set<Teacher_Subject> tsSet;
 	
+	
+
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="tid")
+	Set<Message> messages;
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -48,6 +55,11 @@ public class Teacher {
 		return tsSet;
 	}
 	
+	public Set<Message> getMessages() {
+		return messages;
+	}
+	
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -62,5 +74,9 @@ public class Teacher {
 	}
 	public void setTsSet(Set<Teacher_Subject> tsSet) {
 		this.tsSet = tsSet;
+	}
+	
+	public void setMessages(Set<Message> messages) {
+		this.messages = messages;
 	}
 }

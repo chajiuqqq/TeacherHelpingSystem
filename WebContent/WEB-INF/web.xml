@@ -28,4 +28,24 @@
 		<servlet-name>DealLogin</servlet-name>
 		<url-pattern>/deal_login</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>SubmitRequest</servlet-name>
+		<servlet-class>ser.SubmitRequest</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SubmitRequest</servlet-name>
+		<url-pattern>/submitRequest</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>GetMessage</servlet-name>
+		<servlet-class>ser.GetMessage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetMessage</servlet-name>
+		<url-pattern>/getmessage</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

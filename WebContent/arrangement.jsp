@@ -1,3 +1,4 @@
+<%@page import="poj.Teacher"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -36,6 +37,50 @@
 
 </head>
 <body>
+<%Teacher teacher=(Teacher)request.getSession().getAttribute("current_teacher");
+	out.println(teacher.getName());
+%>
+
+<button id="message_btn">我的消息</button><br/>
+<p id="message_table"></p>
+
+
+<script>
+	$(function(){
+		$.get(
+				"getmessage",
+				function(data){
+					var messages=$.parseJSON(data);
+					var str="<table>";
+					str+="<tr><td>申请人</td>";
+					str+="<td>课程名称</td>";
+					str+="<td>上课时间</td>";
+					str+="<td>上课地点</td></tr>";
+					for(i in messages){
+						str+="<tr>";
+						str+="<td ts_id='"+messages[i].id +"'>"+ messages[i].tName+"</td>";
+						str+="<td ts_id='"+messages[i].id +"'>"+ messages[i].sName+"</td>";
+						str+="<td ts_id='"+messages[i].id +"'>"+ messages[i].period+"</td>";
+						str+="<td ts_id='"+messages[i].id +"'>"+ messages[i].position+"</td>";
+						str+="";
+						str+="</tr>";
+					}
+					str+="</tr></table>";
+					$('#message_table').append(str);
+				}
+			);
+		
+		$('#message_table').hide();
+		$('#message_btn').click(function(){
+			$('#message_table').slideToggle(500);
+		});
+		
+		
+		
+	});
+
+</script>
+
 
 <button id="btn">刷新</button>
 
@@ -122,6 +167,7 @@
 					"arrangement",
 					function(data){
 						var ts_list=$.parseJSON(data);
+						
 						for(i in ts_list){
 							var current_td=$("td[id="+ts_list[i].period+"]");
 							current_td.css("background-color","skyblue");
@@ -168,7 +214,7 @@
 					if(teachers.length!=0){
 						for(i in teachers){
 							var str="<tr><td>"+teachers[i].name+"</td>";
-							str+="<td><a href='submitRequest?tno="+teachers[i].tno+"&current_ts="+ts_id+"'><button>请求代课</button></a></td></tr>"
+							str+="<td><button tno='"+teachers[i].tno+"' current_ts='"+ts_id+"'>请求代课</button></td></tr>"
 							$("#table_available_teacher").append(str);
 							
 						}
@@ -180,7 +226,24 @@
 					$("#div_available_teacher").slideDown(500);
 				}
 			);
+			
 
+		});
+		
+		$('#table_available_teacher').delegate("button", "click",function(){
+			var thiseven=$(this);
+			console.log(typeof(thiseven)+" "+thiseven.attr('tno'));
+			var tno=thiseven.attr("tno");
+			var current_ts=thiseven.attr("current_ts");
+			$.post(
+				"submitRequest",
+				{"tno":tno,"current_ts":current_ts},
+				function(data){
+
+					//$('button[tno='+ tno +']').attr("disabled","disabled");
+					alert('申请成功！'+tno);
+				}
+			);
 		});
 		
 		$('#div_available_teacher').mouseleave(function(){

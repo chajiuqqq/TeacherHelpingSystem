@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.TeacherDAO;
+import poj.Teacher;
 
 public class DealLogin extends HttpServlet {
 	@Override
@@ -18,7 +19,11 @@ public class DealLogin extends HttpServlet {
 		String username=req.getParameter("username");
 		String password=req.getParameter("password");
 		
-		boolean result=TeacherDAO.checkUser(username, password);
+		Teacher teacher=TeacherDAO.getTeacherObj(username, password);
+		boolean result=(teacher==null)?false:true;
+		if(result){
+			req.getSession().setAttribute("current_teacher", teacher);
+		}
 		res.setContentType("text/html;charset=utf-8");
 		res.getWriter().print("{\"result\":"+result+"}");
 	}

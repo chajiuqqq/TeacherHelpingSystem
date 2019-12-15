@@ -13,14 +13,22 @@ import DAO.TeacherDAO;
 import DAO.adminDAO;
 import net.sf.json.JSONSerializer;
 import poj.Simple_t_s;
+import poj.Teacher;
 import poj.Teacher_Subject;
 
 public class Arrangement extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		res.setContentType("text/html;charset=utf-8");
+		
+		Teacher teacher=(Teacher)req.getSession().getAttribute("current_teacher");
+		
+		
+		
 		TeacherDAO teacherDAO=new TeacherDAO();
-		List<Teacher_Subject> t_s_list=adminDAO.get_arrangement(10001);
+		List<Teacher_Subject> t_s_list=adminDAO.get_arrangement(teacher.getTno());
 		
 		List<Simple_t_s> simple_t_s_list=new ArrayList<Simple_t_s>();
 		for(Teacher_Subject t_s:t_s_list){
@@ -35,7 +43,6 @@ public class Arrangement extends HttpServlet {
 		
 		String arragement=JSONSerializer.toJSON(simple_t_s_list).toString();
 		System.out.println(arragement);
-		res.setContentType("text/html;charset=utf-8");
 		res.getWriter().print(arragement);
 	}
 	
