@@ -153,7 +153,6 @@
 			var ts_id=current.attr("TS_id");
 			$("#table_available_teacher").empty();
 			$("#div_available_teacher").slideUp(500);
-			
 			$.get(
 				"getAvailableTeacher",
 				{"TS_id":ts_id},
@@ -177,12 +176,19 @@
 						$("#table_available_teacher").append("<strong>无</strong>");
 					}
 
-					$("#div_available_teacher").slideToggle(500);
 					$("#div_available_teacher").css({"top":y,"left":x+width});
+					$("#div_available_teacher").slideDown(500);
 				}
 			);
 
 		});
+		
+		$('#div_available_teacher').mouseleave(function(){
+			$("#table_available_teacher").empty();
+			$("#div_available_teacher").slideUp(500);
+		});
+		
+		
 		
 		
 	});

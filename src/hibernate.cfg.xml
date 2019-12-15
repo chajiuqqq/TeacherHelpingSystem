@@ -18,6 +18,7 @@
        	<mapping class="poj.Place"/>
        	<mapping class="poj.Subject"/>
        	<mapping class="poj.Time"/>
+       	<mapping class="poj.Teacher_Subject"/>
 	</session-factory>
 
 

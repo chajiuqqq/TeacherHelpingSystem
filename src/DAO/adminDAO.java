@@ -50,6 +50,30 @@ public class adminDAO {
 		sf.close();
 	}
 	
+//	public static List<Teacher_Subject> get_arrangement(int tid) {
+//		SessionFactory sf=new Configuration().configure().buildSessionFactory();
+//		Session s=sf.openSession();
+//		s.beginTransaction();
+//		
+//		String sql="select * from teacher_subject a where a.tid=:tid";
+//		SQLQuery query=s.createSQLQuery(sql);
+//		query.setParameter("tid", tid);
+//		List<Teacher_Subject> t_s_list=new ArrayList<Teacher_Subject>();
+//		List<Object[]> list=query.list();
+//		for(Object[] os:list){
+//			int id=(int)os[0];
+//			int sid=(int)os[2];
+//			int timeid=(int)os[3];
+//			int placeid=(int)os[4];
+//			Teacher_Subject t_s=new Teacher_Subject(id,tid, sid, timeid, placeid);
+//			t_s_list.add(t_s);
+////			System.out.println( "\t"+timeid+ "\t"+placeid);
+//		}
+//		s.getTransaction().commit();
+//		s.close();
+//		sf.close();
+//		return t_s_list;
+//	}
 	public static List<Teacher_Subject> get_arrangement(int tid) {
 		SessionFactory sf=new Configuration().configure().buildSessionFactory();
 		Session s=sf.openSession();
@@ -58,23 +82,13 @@ public class adminDAO {
 		String sql="select * from teacher_subject a where a.tid=:tid";
 		SQLQuery query=s.createSQLQuery(sql);
 		query.setParameter("tid", tid);
-		List<Teacher_Subject> t_s_list=new ArrayList<Teacher_Subject>();
-		List<Object[]> list=query.list();
-		for(Object[] os:list){
-			int id=(int)os[0];
-			int sid=(int)os[2];
-			int timeid=(int)os[3];
-			int placeid=(int)os[4];
-			Teacher_Subject t_s=new Teacher_Subject(id,tid, sid, timeid, placeid);
-			t_s_list.add(t_s);
-//			System.out.println( "\t"+timeid+ "\t"+placeid);
-		}
+		List<Teacher_Subject> list=query.list();
+		
 		s.getTransaction().commit();
 		s.close();
 		sf.close();
-		return t_s_list;
+		return list;
 	}
-	
 	
 	public static List<Teacher> get_available_teacher(int TS_id) {       
 
