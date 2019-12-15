@@ -19,6 +19,7 @@
        	<mapping class="poj.Subject"/>
        	<mapping class="poj.Time"/>
        	<mapping class="poj.Teacher_Subject"/>
+       	<mapping class="poj.Message"/>
 	</session-factory>
 
 
