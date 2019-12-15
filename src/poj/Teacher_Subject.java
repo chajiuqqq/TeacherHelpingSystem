@@ -8,11 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import DAO.PlaceDAO;
-import DAO.SubjectDAO;
-import DAO.TeacherDAO;
-import DAO.TimeDAO;
 @Entity
 @Table(name="teacher_subject")
 public class Teacher_Subject {
@@ -40,14 +35,7 @@ public class Teacher_Subject {
 	public Teacher_Subject() {
 		// TODO Auto-generated constructor stub
 	}
-	public Teacher_Subject(int aid, int tid,int sid,int timeid,int placeid) {
-		// TODO Auto-generated constructor stub
-		id=aid;
-		teacher=TeacherDAO.getTeacherObj(tid);
-		subject=SubjectDAO.getSubjectObj(sid);
-		time=TimeDAO.getTimeObj(timeid);
-		place=PlaceDAO.getPlaceObj(placeid);
-	}
+	
 	
 	public int getId() {
 		return id;

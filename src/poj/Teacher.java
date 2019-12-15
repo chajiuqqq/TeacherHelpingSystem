@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,7 +20,6 @@ import javax.persistence.Table;
 public class Teacher {
 	
 	@Id
-	//@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="tno")
 	int tno;
 	
@@ -28,13 +28,9 @@ public class Teacher {
 	String username;
 	String password;
 	
-	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@JoinTable(
-			name="teacher_subject",
-			joinColumns=@JoinColumn(name="tid"),
-			inverseJoinColumns=@JoinColumn(name="sid")
-	)
-	Set<Subject> subjects;
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="tid")
+	Set<Teacher_Subject> tsSet;
 	
 	public String getName() {
 		return name;
@@ -48,8 +44,8 @@ public class Teacher {
 	public String getUsername() {
 		return username;
 	}
-	public Set<Subject> getSubjects() {
-		return subjects;
+	public Set<Teacher_Subject> getTsSet() {
+		return tsSet;
 	}
 	
 	public void setName(String name) {
@@ -64,7 +60,7 @@ public class Teacher {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public void setSubjects(Set<Subject> subjects) {
-		this.subjects = subjects;
+	public void setTsSet(Set<Teacher_Subject> tsSet) {
+		this.tsSet = tsSet;
 	}
 }

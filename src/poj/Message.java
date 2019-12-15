@@ -22,7 +22,7 @@ public class Message {
 	@JoinColumn(name="tid")
 	Teacher teacher;
 	
-	@OneToOne
+	
 	int ts_id;
 	
 	

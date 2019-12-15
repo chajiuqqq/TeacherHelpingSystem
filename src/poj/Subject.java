@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,13 +25,9 @@ public class Subject {
 	
 	String name;
 	
-	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@JoinTable(
-			name="teacher_subject",
-			joinColumns=@JoinColumn(name="sid"),
-			inverseJoinColumns=@JoinColumn(name="tid")
-	)
-	Set<Teacher> teachers;
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="tid")
+	Set<Teacher_Subject> tsSet;
 	
 	public int getId() {
 		return id;
@@ -38,10 +35,9 @@ public class Subject {
 	public String getName() {
 		return name;
 	}
-	public Set<Teacher> getTeachers() {
-		return teachers;
+	public Set<Teacher_Subject> getTsSet() {
+		return tsSet;
 	}
-	
 	
 	public void setId(int id) {
 		this.id = id;
@@ -49,7 +45,7 @@ public class Subject {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public void setTeachers(Set<Teacher> teachers) {
-		this.teachers = teachers;
+	public void setTsSet(Set<Teacher_Subject> tsSet) {
+		this.tsSet = tsSet;
 	}
 }

@@ -34,16 +34,16 @@ public class TeacherDAO {
 		return t;
 	}
 	
-	public Set<Subject> get_subjects_of_this_teacher(int tid){
-		SessionFactory sf=new Configuration().configure().buildSessionFactory();
-		Session s=sf.openSession();
-		s.beginTransaction();
-		Teacher teacher=(Teacher)s.get(Teacher.class, tid);
-		s.getTransaction().commit();
-		s.close();
-		sf.close();
-		return teacher.getSubjects();
-	}
+//	public Set<Subject> get_subjects_of_this_teacher(int tid){
+//		SessionFactory sf=new Configuration().configure().buildSessionFactory();
+//		Session s=sf.openSession();
+//		s.beginTransaction();
+//		Teacher teacher=(Teacher)s.get(Teacher.class, tid);
+//		s.getTransaction().commit();
+//		s.close();
+//		sf.close();
+//		return teacher.getSubjects();
+//	}
 	public static boolean checkUser(String username,String password) {
 		SessionFactory sf=new Configuration().configure().buildSessionFactory();
 		Session s=sf.openSession();
@@ -69,10 +69,10 @@ public class TeacherDAO {
 	
 	
 	public static void main(String[] args) {
-		TeacherDAO dao=new TeacherDAO();
-		for(Subject s:dao.get_subjects_of_this_teacher(10001)){
-			System.out.println(s.getId());
-			System.out.println(s.getName());
-		}
+//		TeacherDAO dao=new TeacherDAO();
+//		for(Subject s:dao.get_subjects_of_this_teacher(10001)){
+//			System.out.println(s.getId());
+//			System.out.println(s.getName());
+//		}
 	}
 }

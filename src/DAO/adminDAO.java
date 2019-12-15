@@ -17,63 +17,39 @@ import poj.Time;
 
 public class adminDAO {
 	
-	public static void arrange_s_t(int tid,int sid,String time,String place) {
-		SessionFactory sf=new Configuration().configure().buildSessionFactory();
-		Session s=sf.openSession();
-		//添加老师的科目
-		s.beginTransaction();
-		Teacher t=(Teacher)s.get(Teacher.class, tid);
-		Set<Subject> subjects=t.getSubjects();
-		
-		Subject subject=(Subject)s.get(Subject.class, sid);
-		subjects.add(subject);
-
-		s.getTransaction().commit();
-		
-		
-		//设置timeid和placeid
-		s.beginTransaction();
-		String sql="update teacher_subject a set a.timeid=:timeid,a.placeid=:placeid where a.tid=:tid and a.sid=:sid";
-		SQLQuery query=s.createSQLQuery(sql);
-		
-		
-		
-		query.setParameter("timeid", TimeDAO.getTimeObj(time).getId());
-		query.setParameter("placeid",PlaceDAO.getPlaceObj(place).getId());
-		query.setParameter("tid", tid);
-		query.setParameter("sid", sid);
-		
-		int i=query.executeUpdate();
-
-		s.getTransaction().commit();
-		s.close();
-		sf.close();
-	}
-	
-//	public static List<Teacher_Subject> get_arrangement(int tid) {
+//	public static void arrange_s_t(int tid,int sid,String time,String place) {
 //		SessionFactory sf=new Configuration().configure().buildSessionFactory();
 //		Session s=sf.openSession();
+//		//添加老师的科目
 //		s.beginTransaction();
+//		Teacher t=(Teacher)s.get(Teacher.class, tid);
+//		Set<Subject> subjects=t.getSubjects();
 //		
-//		String sql="select * from teacher_subject a where a.tid=:tid";
+//		Subject subject=(Subject)s.get(Subject.class, sid);
+//		subjects.add(subject);
+//
+//		s.getTransaction().commit();
+//		
+//		
+//		//设置timeid和placeid
+//		s.beginTransaction();
+//		String sql="update teacher_subject a set a.timeid=:timeid,a.placeid=:placeid where a.tid=:tid and a.sid=:sid";
 //		SQLQuery query=s.createSQLQuery(sql);
+//		
+//		
+//		
+//		query.setParameter("timeid", TimeDAO.getTimeObj(time).getId());
+//		query.setParameter("placeid",PlaceDAO.getPlaceObj(place).getId());
 //		query.setParameter("tid", tid);
-//		List<Teacher_Subject> t_s_list=new ArrayList<Teacher_Subject>();
-//		List<Object[]> list=query.list();
-//		for(Object[] os:list){
-//			int id=(int)os[0];
-//			int sid=(int)os[2];
-//			int timeid=(int)os[3];
-//			int placeid=(int)os[4];
-//			Teacher_Subject t_s=new Teacher_Subject(id,tid, sid, timeid, placeid);
-//			t_s_list.add(t_s);
-////			System.out.println( "\t"+timeid+ "\t"+placeid);
-//		}
+//		query.setParameter("sid", sid);
+//		
+//		int i=query.executeUpdate();
+//
 //		s.getTransaction().commit();
 //		s.close();
 //		sf.close();
-//		return t_s_list;
 //	}
+	
 	public static List<Teacher_Subject> get_arrangement(int tid) {
 		SessionFactory sf=new Configuration().configure().buildSessionFactory();
 		Session s=sf.openSession();
@@ -82,13 +58,21 @@ public class adminDAO {
 		String sql="select * from teacher_subject a where a.tid=:tid";
 		SQLQuery query=s.createSQLQuery(sql);
 		query.setParameter("tid", tid);
-		List<Teacher_Subject> list=query.list();
+
+		List<Teacher_Subject> t_s_list=new ArrayList<Teacher_Subject>();
+		List<Object[]> list=query.list();
 		
+		for(Object[] os:list){
+			int id=(int)os[0];
+			Teacher_Subject t_s=(Teacher_Subject)s.get(Teacher_Subject.class, id);
+			t_s_list.add(t_s);
+		}
 		s.getTransaction().commit();
 		s.close();
 		sf.close();
-		return list;
+		return t_s_list;
 	}
+	
 	
 	public static List<Teacher> get_available_teacher(int TS_id) {       
 
