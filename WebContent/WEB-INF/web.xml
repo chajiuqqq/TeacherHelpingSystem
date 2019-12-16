@@ -47,5 +47,15 @@
 		<servlet-name>GetMessage</servlet-name>
 		<url-pattern>/getmessage</url-pattern>
 	</servlet-mapping>
+	dealMessage
+	
+	<servlet>
+		<servlet-name>DealMessage</servlet-name>
+		<servlet-class>ser.DealMessage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DealMessage</servlet-name>
+		<url-pattern>/dealmessage</url-pattern>
+	</servlet-mapping>
 	
 </web-app>

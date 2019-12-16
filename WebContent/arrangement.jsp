@@ -56,13 +56,16 @@
 					str+="<td>课程名称</td>";
 					str+="<td>上课时间</td>";
 					str+="<td>上课地点</td></tr>";
+					console.log(messages);
 					for(i in messages){
+						//console.log(i+" "+messages[i]);
 						str+="<tr>";
-						str+="<td ts_id='"+messages[i].id +"'>"+ messages[i].tName+"</td>";
-						str+="<td ts_id='"+messages[i].id +"'>"+ messages[i].sName+"</td>";
-						str+="<td ts_id='"+messages[i].id +"'>"+ messages[i].period+"</td>";
-						str+="<td ts_id='"+messages[i].id +"'>"+ messages[i].position+"</td>";
-						str+="";
+						str+="<td>"+ messages[i].tName+"</td>";
+						str+="<td>"+ messages[i].sName+"</td>";
+						str+="<td>"+ messages[i].period+"</td>";
+						str+="<td>"+ messages[i].position+"</td>";
+						str+="<td><button message_id='"+ i +"' ts_id='"+messages[i].id+"' ans='true'>同意</button></td>";
+						str+="<td><button message_id='"+ i +"' ts_id='"+messages[i].id+"' ans='false'>拒绝</button></td>";
 						str+="</tr>";
 					}
 					str+="</tr></table>";
@@ -75,6 +78,25 @@
 			$('#message_table').slideToggle(500);
 		});
 		
+		$('#message_table').delegate('button',"click",function(){
+			var message_id=$(this).attr('message_id');
+			var ts_id=$(this).attr('ts_id');
+			var ans=$(this).attr('ans');
+			$.get(
+				"dealmessage",
+				{"message_id":message_id,"ts_id":ts_id,"ans":ans}
+			);
+
+			$('button[message_id='+message_id+']').attr('disabled','disabled');
+			alert('操作成功!');
+			
+			if(ans=='true'){
+				$('#btn_refresh').trigger('click');
+			}
+		});
+		
+		
+		
 		
 		
 	});
@@ -82,7 +104,7 @@
 </script>
 
 
-<button id="btn">刷新</button>
+<button id="btn_refresh">刷新</button>
 
 <div>
 	<table class="main_table">
@@ -162,7 +184,7 @@
 
 <script>
 	$(function(){
-		$("#btn").click(function(){
+		$("#btn_refresh").click(function(){
 			$.get(
 					"arrangement",
 					function(data){

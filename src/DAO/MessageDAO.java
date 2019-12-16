@@ -39,5 +39,26 @@ public class MessageDAO {
 		return teacher.getMessages();
 	}
 	
+	public static void removeMessage(int message_id) {
+		SessionFactory sf=new Configuration().configure().buildSessionFactory();
+		Session s=sf.openSession();
+		s.beginTransaction();
+		Message message=(Message)s.get(Message.class, message_id);
+		//把teacher中的该message删除
+		Teacher teacher=message.getTeacher();
+		teacher.getMessages().remove(message);
+		//把该message的teacher置null
+		message.setTeacher(null);
+		//再删除
+		s.delete(message);
+
+		s.getTransaction().commit();
+		s.close();
+		sf.close();
+		
+	}
+	public static void main(String[] args) {
+		removeMessage(81);
+	}
 	
 }
