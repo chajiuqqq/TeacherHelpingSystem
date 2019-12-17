@@ -64,8 +64,8 @@
 						str+="<td>"+ messages[i].sName+"</td>";
 						str+="<td>"+ messages[i].period+"</td>";
 						str+="<td>"+ messages[i].position+"</td>";
-						str+="<td><button message_id='"+ i +"' ts_id='"+messages[i].id+"' ans='true'>同意</button></td>";
-						str+="<td><button message_id='"+ i +"' ts_id='"+messages[i].id+"' ans='false'>拒绝</button></td>";
+						str+="<td><button message_id='"+ i +"' ans='true'>同意</button></td>";
+						str+="<td><button message_id='"+ i +"' ans='false'>拒绝</button></td>";
 						str+="</tr>";
 					}
 					str+="</tr></table>";
@@ -80,11 +80,11 @@
 		
 		$('#message_table').delegate('button',"click",function(){
 			var message_id=$(this).attr('message_id');
-			var ts_id=$(this).attr('ts_id');
+			
 			var ans=$(this).attr('ans');
 			$.get(
 				"dealmessage",
-				{"message_id":message_id,"ts_id":ts_id,"ans":ans}
+				{"message_id":message_id,"ans":ans}
 			);
 
 			$('button[message_id='+message_id+']').attr('disabled','disabled');

@@ -28,13 +28,13 @@ public class Teacher {
 	String username;
 	String password;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
 	@JoinColumn(name="tid")
 	Set<Teacher_Subject> tsSet;
 	
 	
 
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
 	@JoinColumn(name="tid")
 	Set<Message> messages;
 	

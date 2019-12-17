@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
 
+import poj.Teacher;
 import poj.Teacher_Subject;
 
 public class TSDAO {
@@ -17,8 +18,24 @@ public class TSDAO {
 		sf.close();
 		return ts;
 	}
+	public static void updateTS(int TS_id, Teacher new_teacher) {        
+		SessionFactory sf=new Configuration().configure().buildSessionFactory();
+		Session s=sf.openSession();
+		s.beginTransaction();
+		Teacher_Subject ts=(Teacher_Subject)s.get(Teacher_Subject.class, TS_id);
+
+		ts.setTeacher(new_teacher);
+		s.update(ts);
+		
+		s.getTransaction().commit();
+		s.close();
+		sf.close();
+		
+	}
+		
 	
 	public static void main(String[] args) {
-		System.out.println(getTSObj(13).getTeacher().getName());
+		Teacher teacher=TeacherDAO.getTeacherObj(10002);
+		TSDAO.updateTS(13, teacher);
 	}
 }

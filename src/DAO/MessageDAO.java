@@ -44,12 +44,17 @@ public class MessageDAO {
 		Session s=sf.openSession();
 		s.beginTransaction();
 		Message message=(Message)s.get(Message.class, message_id);
-		//把teacher中的该message删除
-		Teacher teacher=message.getTeacher();
-		teacher.getMessages().remove(message);
-		//把该message的teacher置null
-		message.setTeacher(null);
-		//再删除
+//		
+//		//把teacher中的该message删除
+//		Teacher teacher=message.getTeacher();
+//		teacher.getMessages().remove(message);
+//		//把该message的teacher置null
+//		message.setTeacher(null);
+//		
+		
+		//已成功，主要是级联设置不对，all的话，如果删除了该message，也会根据teacher中的Set<Message>重新添加，所以删除不成功。
+		//改为remove或者merge即可。all要慎用
+		
 		s.delete(message);
 
 		s.getTransaction().commit();
@@ -57,8 +62,19 @@ public class MessageDAO {
 		sf.close();
 		
 	}
+	
+	public static Message getMessage(int messageid) {
+		SessionFactory sf=new Configuration().configure().buildSessionFactory();
+		Session s=sf.openSession();
+		s.beginTransaction();
+		Message message=(Message)s.get(Message.class, messageid);
+		s.getTransaction().commit();
+		s.close();
+		sf.close();
+		return message;
+	}
 	public static void main(String[] args) {
-		removeMessage(81);
+		removeMessage(82);
 	}
 	
 }

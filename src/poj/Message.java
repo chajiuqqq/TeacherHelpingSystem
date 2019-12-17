@@ -27,7 +27,7 @@ public class Message {
 	@JoinColumn(name="tid")
 	Teacher teacher;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="ts_id")
 	Teacher_Subject ts;
 	
