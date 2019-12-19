@@ -42,10 +42,14 @@
      #username{
          margin:0 auto;
      }
+     body{
+     	background-image:url(cat.jpg);
+     	padding-bottom:10em;
+     }
     
     </style>
 </head>
-<body style="background-image:url(cat.jpg);padding-bottom:10em;">
+<body >
 
     
 <script>
