@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+
+<script src="https://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
+<link href="https://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
+<script src="https://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+ 
+    
+<html>
+<head>
+    
+
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport"content="width=device-width, user-scalable=no, 
+        initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>  
+    <!--上述代码是为了实现PC端自适应屏幕-->
+    <!--px要改为em，最好用%-->
+    <style>
+     .distance{
+         margin-left:40px;
+         margin-top:10px;
+     }
+     #distance{
+         margin-left:40px;
+         margin-top:10px;
+     }
+     div#table{
+         display:inline-block;
+         margin-top:30px;
+         width:80%;
+         margin-left:10%;
+     }
+     table{
+        text-align:center;
+         font-size:larger;
+         font-weight:bolder;
+     }
+     td{
+         text-align:center;
+         vertical-align:middle;
+     }
+     .h{
+         height:70px;
+     }
+    </style>
+    <script>
+    function up(){
+var num = document.getElementById("password2").value;
+var number = document.getElementById("password1").value;
+var d = document.getElementById("judge");
+if(num==number)
+    d.innerHTML="✔"
+else
+    d.innerHTML="❌";
+}
+    function move(){
+    var d = document.getElementById("below");
+    d.style.display="block";
+}
+    function move2(){
+    var d = document.getElementById("below");
+    d.style.display="none";
+}
+    </script>
+</head>
+<body style="background-image:url(/main4.jpg);padding-bottom:10em;">
+    <div id="top">
+        <ul class="nav nav-tabs">
+  <li role="presentation" class="distance"><a href="Main.html">首页</a></li>
+  <li role="presentation" class="active" id="distance"><a href="#">我的课表</a></li>
+  <li role="presentation" class="distance"><a href="History.html">历史代课记录</a></li>
+  <li role="presentation" class="distance" data-toggle="modal" data-target="#myModal"><a href="#">新的消息<span class="badge">3</span></a>
+  <li role="presentation" style="margin-top:2px;margin-right:70px;margin-left:770px"><img style="float:right;width:50px;margin-right:70px;margin-top:10px" src="teacher2.jpg" class="img-circle" onmousemove="move()" onmouseout="move2()">
+        </ul>
+        <div id="below" style="margin-right:70px;margin-left:1290px;display:none;margin-top:0px;position:absolute" onmousemove="move()" onmouseout="move2()">
+            <button type="button" class="btn btn-default" >个人中心</button>
+        </div>
+    </div>
+  
+ <!--7行7列-->
+    <div id="table" >
+     <table class="table table-striped table-bordered table-hover  table-condensed">
+         <tr class="h" style="background-color:lightyellow">
+             <td>节次/周次</td>
+             <td>星期日</td>
+             <td>星期一</td>
+             <td>星期二</td>
+             <td>星期三</td>
+             <td>星期四</td>
+             <td>星期五</td>
+             <td>星期六</td>
+         </tr>
+         <tr class="h">
+             <td>第一节课</td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+         </tr>
+         <tr class="h">
+             <td>第二节课</td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+         </tr>
+         <tr class="h">
+             <td>第三节课</td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+         </tr>
+         <tr class="h">
+             <td>第四节课</td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+         </tr>
+         <tr class="h">
+             <td>第五节课</td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+         </tr>
+         <tr class="h">
+             <td>第六节课</td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+         </tr>
+     </table>
+    </div>
+
+     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">请求</h4>
+          </div>
+          <div class="modal-body">
+            <p>代课详情</p>
+            <textarea class="form-control"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button data-dismiss="modal" class="btn btn-default" type="button">拒绝</button>
+            <button data-dismiss="modal" class="btn btn-primary" type="button">同意</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+</div>
+
+<div style="height:200px"></div>
+
+</body>
+
+</html>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+<div style="text-align:center;font-size:larger"><span class="glyphicon glyphicon-copyright-mark" ></span>
+ 周莹 蔡佳晨 版权所有
+</div>
+    <div style="text-align:center;color:indianred;font-size:larger"><span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span></div>
+</nav>
