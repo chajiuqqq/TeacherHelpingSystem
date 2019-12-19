@@ -20,13 +20,14 @@ public class DealMessage extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		String ans=req.getParameter("ans");
 		int message_id=Integer.parseInt(req.getParameter("message_id"));
+		Message message=MessageDAO.getMessage(message_id);
 		
 		Teacher current_teacher=((Teacher)req.getSession().getAttribute("current_teacher"));
 		System.out.println(current_teacher.getName());
 		
 		
-		if(ans=="true"){
-			TSDAO.updateTS(message_id,current_teacher);
+		if("true".equals(ans)){
+			TSDAO.updateTS(message.getTs(),current_teacher);
 		
 		}
 		MessageDAO.removeMessage(message_id);

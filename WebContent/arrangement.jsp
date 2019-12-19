@@ -82,6 +82,7 @@
 			var message_id=$(this).attr('message_id');
 			
 			var ans=$(this).attr('ans');
+			console.log("ans: "+ans);
 			$.get(
 				"dealmessage",
 				{"message_id":message_id,"ans":ans}
@@ -105,7 +106,13 @@
 
 
 <button id="btn_refresh">刷新</button>
+<button id="btn_checkout">退出</button>
+<script>
+	$('#btn_checkout').click(function(){
+		location.assign('checkout');
+	});
 
+</script>
 <div>
 	<table class="main_table">
  		<tr>

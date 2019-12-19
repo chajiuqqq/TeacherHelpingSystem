@@ -18,14 +18,12 @@ public class TSDAO {
 		sf.close();
 		return ts;
 	}
-	public static void updateTS(int TS_id, Teacher new_teacher) {        
+	public static void updateTS(Teacher_Subject old_TS, Teacher new_teacher) {        
 		SessionFactory sf=new Configuration().configure().buildSessionFactory();
 		Session s=sf.openSession();
 		s.beginTransaction();
-		Teacher_Subject ts=(Teacher_Subject)s.get(Teacher_Subject.class, TS_id);
-
-		ts.setTeacher(new_teacher);
-		s.update(ts);
+		old_TS.setTeacher(new_teacher);
+		s.update(old_TS);
 		
 		s.getTransaction().commit();
 		s.close();
@@ -36,6 +34,6 @@ public class TSDAO {
 	
 	public static void main(String[] args) {
 		Teacher teacher=TeacherDAO.getTeacherObj(10002);
-		TSDAO.updateTS(13, teacher);
+		//TSDAO.updateTS(13, teacher);
 	}
 }
