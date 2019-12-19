@@ -18,11 +18,11 @@
          background-color:white;
          text-align:center;
          width:600px;
-         height:520px;
+         height:575px;
          margin:15% auto;
      }
      .left{
-         width:40%;
+         width:30%;
          text-align:right;
          padding-right:5px;
      }
@@ -53,12 +53,19 @@
       
       <form action="">
       <table style="width:350px;margin:5px auto">
+          <tr class="distance">
+              <td class="left">姓名：<br />
+                  <br />
+              </td>
+              <td  class="right"><input id="realname" name="realname" type="text" class="form-control" placeholder="请输入用户名" style="width:100%"><br />
+              </td>
+          </tr>
           
           <tr class="distance">
               <td class="left">账号：<br />
                   <br />
               </td>
-              <td  class="right"><input id="username" type="text" class="form-control" placeholder="请输入用户名" style="width:100%"><br />
+              <td  class="right"><input id="username" name="username" type="text" class="form-control" placeholder="请输入用户名" style="width:100%"><br />
               </td>
           </tr>
          
@@ -66,7 +73,7 @@
               <td class="left">密码：<br />
                   <br />
               </td>
-              <td class="right"><input id="password1" type="password" class="form-control" placeholder="请输入6-20位字母或数字" style="width:100%"><br />
+              <td class="right"><input id="password1" name="password" type="password" class="form-control" placeholder="请输入6-20位字母或数字" style="width:100%"><br />
               </td>
           </tr>
           <tr class="distance">
@@ -81,7 +88,7 @@
               <td class="left">工号：<br />
                   <br />
               </td>
-              <td class="right"><input id="tno" type="text" class="form-control" placeholder="请输入您在该校的工号" style="width:100%"><br />
+              <td class="right"><input id="tno" name="tno" type="text" class="form-control" placeholder="请输入您在该校的工号" style="width:100%"><br />
               </td>
           </tr>
           
@@ -126,43 +133,69 @@
   </div>
   
   <script type="text/javascript">
-  	$('input[type!=checkbox]').after("<td></td>");
-  	$('input[type!=checkbox]').bind('blur',function(){
-  		var curr=$(this);
-  		if(curr.val().length==0){
-  			curr.next().html("<span style='color:red'>输入为空<span>");
-  		}
+  	$(function(){
+  		$('input[type!=checkbox]').after("<td></td>");
+  	  	$('input[type!=checkbox]').bind('blur',function(){
+  	  		var curr=$(this);
+  	  		if(curr.val().length==0){
+  	  			curr.next().html("<span style='color:red'>输入为空<span>");
+  	  		}else if(curr.next().children('span').text()=='输入为空')
+  	  			curr.next().html("");
+  	  		
+  	  		
+  	  		
+  	  	});
+  	  	
+  	  	$('#password2').bind('keyup',function(){
+  	  		var p1=$('#password1').val();
+  	  		var p2=$(this).val();
+  	  		if(p1!=p2)
+  	  			$(this).next().html("<span style='color:red'>两次密码不一致！<span>");
+  	  		else
+  	  			$(this).next().html("");
+  	  		
+  	  	});
+  	  	
+  	  	$('#tno,#phoneNumber').bind('keyup',function(){
+  	  		var tno=$(this).val();
+  	  		if(Number.isNaN(Number(tno)))
+  	  			$(this).next().html("<span style='color:red'>需要为数字！<span>");
+  	  		else
+  	  			$(this).next().html("");
+  	  		
+  	  	});
+  	  	$('#btn_submit_register').attr('disabled','disabled');
+  	  	
+  	  	$('#checkbox_treaty').click(function(){ 
+  			var ischeck=$(this).prop("checked"); 
+  			if(!ischeck){ 
+  			 $('#btn_submit_register').prop('disabled','disabled');
+  			
+  			}else{ 
+  				//
+  				$('#btn_submit_register').removeAttr('disabled');
+  			}
+  		}); 
   	});
-  	
-  	$('#password2').bind('keyup',function(){
-  		var p1=$('#password1').val();
-  		var p2=$(this).val();
-  		if(p1!=p2)
-  			$(this).next().html("<span style='color:red'>两次密码不一致！<span>");
-  		else
-  			$(this).next().html("");
+  
+  </script>
+  
+  <script>
+  	$(function(){
+  		$('#btn_submit_register').click(function(){
+  			var url="dealregister?"+$("form").serialize();
+  			$.get(
+  				url
+  			);
+  			alert('注册成功！请重新登录！');
+			window.open("login.jsp");
+  			
+  		});
   		
+  		$('#link_to_login').click(function(){
+  			location.assign('login.jsp');
+  		});
   	});
-  	
-  	$('#tno,#phoneNumber').bind('keyup',function(){
-  		var tno=$(this).val();
-  		if(Number.isNaN(Number(tno)))
-  			$(this).next().html("<span style='color:red'>需要为数字！<span>");
-  		else
-  			$(this).next().html("");
-  		
-  	});
-  	$('#btn_submit_register').attr('disabled','disabled');
-  	$('#checkbox_treaty').click(function(){ 
-		var ischeck=$(this).attr("checked"); 
-		if(ischeck==undefined){ 
-		 $('#btn_submit_register').attr('disabled','disabled');
-		
-		}else{ 
-			//
-			$('#btn_submit_register').attr('disabled','');
-		}
-	}); 
   
   </script>
     

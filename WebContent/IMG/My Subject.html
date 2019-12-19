@@ -69,7 +69,7 @@ else
   <li role="presentation" class="distance"><a href="Main.html">首页</a></li>
   <li role="presentation" class="active" id="distance"><a href="#">我的课表</a></li>
   <li role="presentation" class="distance"><a href="History.html">历史代课记录</a></li>
-  <li role="presentation" class="distance" data-toggle="modal" data-target="#myModal"><a href="#">新的消息<span class="badge">3</span></a>
+  <li role="presentation" class="distance" data-toggle="modal" data-target="#myModal"><a href="#" id="message_btn" >新的消息<span class="badge">3</span></a>
   <li role="presentation" style="margin-top:2px;margin-right:70px;margin-left:770px"><img style="float:right;width:50px;margin-right:70px;margin-top:10px" src="teacher2.jpg" class="img-circle" onmousemove="move()" onmouseout="move2()">
         </ul>
         <div id="below" style="margin-right:70px;margin-left:1290px;display:none;margin-top:0px;position:absolute" onmousemove="move()" onmouseout="move2()">
@@ -156,18 +156,18 @@ else
      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
-            <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">请求</h4>
-          </div>
-          <div class="modal-body">
-            <p>代课详情</p>
-            <textarea class="form-control"></textarea>
-          </div>
-          <div class="modal-footer">
-            <button data-dismiss="modal" class="btn btn-default" type="button">拒绝</button>
-            <button data-dismiss="modal" class="btn btn-primary" type="button">同意</button>
-          </div>
+	          <div class="modal-header">
+		            <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+		            <h4 class="modal-title">请求</h4>
+	          </div>
+	          <div class="modal-body">
+		            <p>代课详情</p>
+		            <p id="message_table"></p>
+	          </div>
+	          <div class="modal-footer">
+		            <button data-dismiss="modal" class="btn btn-default" type="button">拒绝</button>
+		            <button data-dismiss="modal" class="btn btn-primary" type="button">同意</button>
+	          </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
 </div>

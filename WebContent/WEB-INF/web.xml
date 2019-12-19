@@ -67,5 +67,14 @@
 		<url-pattern>/checkout</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>DealRegister</servlet-name>
+		<servlet-class>ser.DealRegister</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DealRegister</servlet-name>
+		<url-pattern>/dealregister</url-pattern>
+	</servlet-mapping>
+	
 	
 </web-app>

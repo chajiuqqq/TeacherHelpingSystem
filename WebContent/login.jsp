@@ -65,7 +65,7 @@
 						  var result=$.parseJSON(data).result;
 						  if(result){
 							  alert("登录成功！");
-							  location.assign("arrangement.jsp");
+							  location.assign("index.jsp");
 						  }else{
 							  alert("登录失败！用户名不正确或者密码错误");
 						  }
