@@ -19,12 +19,24 @@ public class DealLogin extends HttpServlet {
 		String username=req.getParameter("username");
 		String password=req.getParameter("password");
 		
-		Teacher teacher=TeacherDAO.getTeacherObj(username, password);
-		boolean result=(teacher==null)?false:true;
-		if(result){
-			req.getSession().setAttribute("current_teacher", teacher);
+		boolean result=false;
+		String role="";
+		
+		if("admin".equals(username) && "admin".equals(password)){
+			role="admin";
+			result=true;
+		}else{
+			Teacher teacher=TeacherDAO.getTeacherObj(username, password);
+			if(teacher!=null){
+				role="teacher";
+				result=true;
+				req.getSession().setAttribute("current_teacher", teacher);
+			}
+	
 		}
+		
+				
 		res.setContentType("text/html;charset=utf-8");
-		res.getWriter().print("{\"result\":"+result+"}");
+		res.getWriter().print("{\"result\":"+result+",\"role\":\""+ role +"\"}");
 	}
 }

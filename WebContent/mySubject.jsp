@@ -36,15 +36,16 @@
      }
      td{
 	         text-align:center;
-	         
 	         min-width:20px;
 			white-space:pre-line;
 			text-align:center;
 			width:100px;
 			height:80px;
-     }.
+     }
      .h{
          height:70px;
+         vertical-align:text-top;
+         background-color:#006400;
      }
      
 	#div_available_teacher{
@@ -77,20 +78,20 @@
 	}
     </script>
 </head>
-<body style="background-image:url(main4.jpg);padding-bottom:10em;">
+<body style="background-image:url(ts_bg2.jpg);padding-bottom:10em;">
     <div id="top">
         <ul class="nav nav-tabs">
-			  <li role="presentation" class="distance"><a href="Main.html">首页</a></li>
+			  <li role="presentation" class="distance"><a href="index.jsp">首页</a></li>
 			  <li role="presentation" class="active" id="distance"><a href="#">我的课表</a></li>
 			  <li role="presentation" class="distance"><a href="History.html">历史代课记录</a></li>
 			  <li role="presentation" class="distance" data-toggle="modal" data-target="#myModal">
 			  		<a href="#"  id="message_btn" >新的消息<span class="badge">3</span></a>
 			  </li>
-			  <li role="presentation" style="margin-top:2px;margin-right:70px;margin-left:770px">
+			  <li role="presentation" style="margin-right:20px;margin-left:420px">
 		  			<img id="teacher_img" src="teacher2.jpg" class="img-circle" onmousemove="move()" onmouseout="move2()">
   			   </li>
         </ul>
-        <div id="below" style="margin-right:70px;margin-left:1290px;display:none;margin-top:0px;position:absolute" onmousemove="move()" onmouseout="move2()">
+        <div id="below" style="margin-left:948px;display:none;margin-top:0px;position:absolute" onmousemove="move()" onmouseout="move2()">
             <button type="button" class="btn btn-default" >个人中心</button>
         </div>
     </div>
@@ -127,8 +128,8 @@
 						str+="<td>"+ messages[i].sName+"</td>";
 						str+="<td>"+ messages[i].period+"</td>";
 						str+="<td>"+ messages[i].position+"</td>";
-						str+="<td><button message_id='"+ i +"' ans='true'>同意</button></td>";
-						str+="<td><button message_id='"+ i +"' ans='false'>拒绝</button></td>";
+						str+="<td><button message_id='"+ i +"' ans='true' class='btn btn-info'>同意</button></td>";
+						str+="<td><button message_id='"+ i +"' ans='false' class='btn btn-default'>拒绝</button></td>";
 						str+="</tr>";
 					}
 					str+="</tr></table>";
@@ -170,7 +171,7 @@
  <!--7行7列-->
     <div id="table" >
      <table class="table table-striped table-bordered table-hover  table-condensed">
-         <tr class="h" style="background-color:#D2691E">
+         <tr class="h" >
              <td>节次/周次</td>
              <td>星期日</td>
              <td>星期一</td>
@@ -301,7 +302,7 @@
 					if(teachers.length!=0){
 						for(i in teachers){
 							var str="<tr><td>"+teachers[i].name+"</td>";
-							str+="<td><button tno='"+teachers[i].tno+"' current_ts='"+ts_id+"'>请求代课</button></td></tr>"
+							str+="<td><button tno='"+teachers[i].tno+"' current_ts='"+ts_id+"' class='btn btn-info'>请求代课</button></td></tr>"
 							$("#table_available_teacher").append(str);
 							
 						}

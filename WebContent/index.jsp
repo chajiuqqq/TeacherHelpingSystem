@@ -31,6 +31,12 @@
          margin-top:10px
      }
     
+	#teacher_img{
+		float:right;
+		width:50px;
+		margin-right:10px;
+		margin-top:5px
+	}
     </style>
     <script>
    
@@ -44,16 +50,18 @@
 }
     </script>
 </head>
-<body style="background-image:url(main4.jpg);padding-bottom:10em;">
+<body style="background-image:url(ts_bg2.jpg);padding-bottom:10em;">
     <div id="top">
         <ul class="nav nav-tabs">
   <li role="presentation" class="active" id="distance"><a href="#">首页</a></li>
   <li role="presentation" class="distance"><a href="mySubject.jsp">我的课表</a></li>
   <li role="presentation" class="distance"><a href="History">历史代课记录</a></li>
-  <li role="presentation" class="distance"data-toggle="modal" data-target="#myModal"><a href="#">新的消息<span class="badge">3</span></a>
-  <li role="presentation" style="margin-top:2px;margin-right:70px;margin-left:770px"><img style="float:right;width:50px;margin-right:70px;margin-top:10px" src="teacher2.jpg" class="img-circle" onmousemove="move()" onmouseout="move2()">
+  <li role="presentation" class="distance" data-toggle="modal" data-target="#myModal"><a href="#">新的消息<span class="badge">3</span></a>
+  <li role="presentation" style="margin-right:20px;margin-left:420px">
+		  			<img id="teacher_img" src="teacher2.jpg" class="img-circle" onmousemove="move()" onmouseout="move2()">
+  			   </li>
         </ul>
-        <div id="below" style="margin-right:70px;margin-left:1290px;display:none;margin-top:0px;position:absolute" onmousemove="move()" onmouseout="move2()">
+        <div id="below" style="margin-left:948px;display:none;margin-top:0px;position:absolute" onmousemove="move()" onmouseout="move2()">
             <button type="button" class="btn btn-default" >个人中心</button>
         </div>
     </div>

@@ -62,10 +62,14 @@
 					"deal_login",
 					  {"username":username,"password":password},
 					  function(data){
-						  var result=$.parseJSON(data).result;
-						  if(result){
+						  var str=$.parseJSON(data);
+						  console.log(str);
+						  if(str.result){
 							  alert("登录成功！");
-							  location.assign("index.jsp");
+							  if(str.role=="teacher")
+							  	location.assign("index.jsp");
+							  else
+								  location.assign("console.jsp");
 						  }else{
 							  alert("登录失败！用户名不正确或者密码错误");
 						  }

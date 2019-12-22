@@ -15,6 +15,25 @@
 <link href="https://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
 <script src="https://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
 
+	<style>
+		#select_div{
+			width:500px;
+			padding:20px;
+			margin:0 auto;
+			
+		}
+		table{
+			text-align:center;
+			width:400px;
+			
+		}
+		#div_checkout{
+			position:absolute;
+			right:20px;
+			top:10px;
+		}
+		
+	</style>
 </head>
 <body>
 <%
@@ -25,31 +44,58 @@
 	request.setAttribute("subjects", subjects);
 	
 %>
-
-<div>
-	<select id="select_teacher">
-		<option>请选择老师</option>
-		<c:forEach items="${teachers}" var="teacher" varStatus="st">
-			<option value="${ teacher.tno}">${teacher.name}</option>
-		</c:forEach>
-	</select>
-
-	<select id="select_subject">
-		<option>请选择学科</option>
-		<c:forEach items="${subjects}" var="subject" varStatus="st">
-			<option value="${ subject.id}">${subject.name}</option>
-		</c:forEach>
-	</select>
-
-	<select id="select_time">
-	</select>
-
-	<select id="select_place">
-	</select>
-	
-	<button id="btn_submit">提交</button>
-	
+<div id="div_checkout">
+	<button id="btn_checkout" class="btn btn-danger" onclick="location.assign('login.jsp')">退出</button>
 </div>
+
+<div id="select_div">
+<table >
+	<tr>
+		<td><h3>添加教学课程安排</h3></td>
+	</tr>
+	<tr>
+		<td>
+			<select id="select_teacher" class="form-control">
+				<option>请选择老师</option>
+				<c:forEach items="${teachers}" var="teacher" varStatus="st">
+					<option value="${ teacher.tno}">${teacher.name}</option>
+				</c:forEach>
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<select id="select_subject" class="form-control">
+				<option>请选择学科</option>
+				<c:forEach items="${subjects}" var="subject" varStatus="st">
+					<option value="${ subject.id}">${subject.name}</option>
+				</c:forEach>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<select id="select_time" class="form-control">
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<select id="select_place" class="form-control">
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+	<button id="btn_submit" class="btn btn-warning">提交</button>
+		</td>
+	</tr>
+</table>	
+</div>
+
 
 <script>
 	$(function(){
