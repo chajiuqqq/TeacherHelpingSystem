@@ -1,10 +1,14 @@
 package DAO;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
 
 import poj.Subject;
+import poj.Teacher;
 
 public class SubjectDAO {
 	public static Subject getSubjectObj(int sid) {
@@ -44,5 +48,27 @@ public class SubjectDAO {
 		s.getTransaction().commit();
 		s.close();
 		sf.close();
+	}
+	public static List<Subject> getSubjects() {
+		SessionFactory sf=new Configuration().configure().buildSessionFactory();
+		Session s=sf.openSession();
+		s.beginTransaction();
+		
+		Query q=s.createQuery("from Subject");
+		List<Subject> list=q.list();
+		
+		s.getTransaction().commit();
+		s.close();
+		sf.close();
+		return list;
+	}
+
+	public static void main(String[] args) {
+		List<Subject> list=getSubjects();
+		for(Subject t:list){
+			System.out.println(t.getName());
+		}
+		
+		
 	}
 }

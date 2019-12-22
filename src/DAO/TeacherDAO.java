@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -64,14 +65,28 @@ public class TeacherDAO {
 		sf.close();
 		return teacher;
 	}
-
+	
+	public static List<Teacher> getTeachers() {
+		SessionFactory sf=new Configuration().configure().buildSessionFactory();
+		Session s=sf.openSession();
+		s.beginTransaction();
+		
+		Query q=s.createQuery("from Teacher");
+		List<Teacher> list=q.list();
+		
+		s.getTransaction().commit();
+		s.close();
+		sf.close();
+		return list;
+	}
 	
 	
 	public static void main(String[] args) {
-//		TeacherDAO dao=new TeacherDAO();
-//		for(Subject s:dao.get_subjects_of_this_teacher(10001)){
-//			System.out.println(s.getId());
-//			System.out.println(s.getName());
-//		}
+		List<Teacher> list=getTeachers();
+		for(Teacher t:list){
+			System.out.println(t.getName());
+		}
+		
+		
 	}
 }
