@@ -54,6 +54,16 @@
 		position:absolute;
 		
 	}
+	.btns_top{
+		float:right;
+	}
+	
+	#teacher_img{
+		float:right;
+		width:50px;
+		margin-right:10px;
+		margin-top:5px
+	}
     </style>
     <script>
     
@@ -70,11 +80,15 @@
 <body style="background-image:url(main4.jpg);padding-bottom:10em;">
     <div id="top">
         <ul class="nav nav-tabs">
-  <li role="presentation" class="distance"><a href="Main.html">首页</a></li>
-  <li role="presentation" class="active" id="distance"><a href="#">我的课表</a></li>
-  <li role="presentation" class="distance"><a href="History.html">历史代课记录</a></li>
-  <li role="presentation" class="distance" data-toggle="modal" data-target="#myModal"><a href="#"  id="message_btn" >新的消息<span class="badge">3</span></a>
-  <li role="presentation" style="margin-top:2px;margin-right:70px;margin-left:770px"><img style="float:right;width:50px;margin-right:70px;margin-top:10px" src="teacher2.jpg" class="img-circle" onmousemove="move()" onmouseout="move2()">
+			  <li role="presentation" class="distance"><a href="Main.html">首页</a></li>
+			  <li role="presentation" class="active" id="distance"><a href="#">我的课表</a></li>
+			  <li role="presentation" class="distance"><a href="History.html">历史代课记录</a></li>
+			  <li role="presentation" class="distance" data-toggle="modal" data-target="#myModal">
+			  		<a href="#"  id="message_btn" >新的消息<span class="badge">3</span></a>
+			  </li>
+			  <li role="presentation" style="margin-top:2px;margin-right:70px;margin-left:770px">
+		  			<img id="teacher_img" src="teacher2.jpg" class="img-circle" onmousemove="move()" onmouseout="move2()">
+  			   </li>
         </ul>
         <div id="below" style="margin-right:70px;margin-left:1290px;display:none;margin-top:0px;position:absolute" onmousemove="move()" onmouseout="move2()">
             <button type="button" class="btn btn-default" >个人中心</button>
@@ -82,10 +96,10 @@
     </div>
   
   
-  
-
-<button id="btn_refresh">刷新</button>
-<button id="btn_checkout">退出</button>
+<div class="btns_top">
+	<button id="btn_refresh" class="btn btn-primary">刷新</button>
+	<button id="btn_checkout" class="btn btn-default">退出</button>
+</div>
 <script>
 	$('#btn_checkout').click(function(){
 		location.assign('checkout');
@@ -156,7 +170,7 @@
  <!--7行7列-->
     <div id="table" >
      <table class="table table-striped table-bordered table-hover  table-condensed">
-         <tr class="h" style="background-color:lightyellow">
+         <tr class="h" style="background-color:#D2691E">
              <td>节次/周次</td>
              <td>星期日</td>
              <td>星期一</td>
@@ -245,7 +259,7 @@
 						
 						for(i in ts_list){
 							var current_td=$("td[id="+ts_list[i].period+"]");
-							current_td.css("background-color","skyblue");
+							current_td.css("background-color","yellow");
 							current_td.html("<div>"+ts_list[i].tName+"\n"+ts_list[i].sName+"\n"+ts_list[i].position+"\n"+ts_list[i].period+"</div>");
 							current_td.attr("TS_id",ts_list[i].id);
 							console.log(current_td.attr("TS_id"));
@@ -347,13 +361,9 @@
 		            <h4 class="modal-title">请求</h4>
 	          </div>
 	          <div class="modal-body">
-		            <p>代课详情</p>
-		            <p id="message_table"></p>
+		          <p id="message_table"></p>
 	          </div>
-	          <div class="modal-footer">
-		            <button data-dismiss="modal" class="btn btn-default" type="button">拒绝</button>
-		            <button data-dismiss="modal" class="btn btn-primary" type="button">同意</button>
-	          </div>
+	          
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
 </div>

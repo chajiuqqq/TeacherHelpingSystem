@@ -30,10 +30,6 @@ public class GetAvailableTeacher extends HttpServlet {
 		for(Teacher t:teachers){
 			simple_Teachers.add(new Simple_Teacher(t.getTno(),t.getName(), t.getUsername(),t.getPassword()));
 		}
-		
-		
-		
-		
 		String str_teachers=JSONSerializer.toJSON(simple_Teachers).toString();
 		res.setContentType("text/html;charset=utf-8");
 		res.getWriter().print(str_teachers);

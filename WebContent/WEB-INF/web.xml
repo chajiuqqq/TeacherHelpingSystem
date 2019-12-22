@@ -76,5 +76,31 @@
 		<url-pattern>/dealregister</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>DealAddTS</servlet-name>
+		<servlet-class>ser.DealAddTS</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DealAddTS</servlet-name>
+		<url-pattern>/dealaddTS</url-pattern>
+	</servlet-mapping>
 	
+	
+	<servlet>
+		<servlet-name>GetAvailablePlace</servlet-name>
+		<servlet-class>ser.GetAvailablePlace</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetAvailablePlace</servlet-name>
+		<url-pattern>/getavailableplace</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GetAvailableTime</servlet-name>
+		<servlet-class>ser.GetAvailableTime</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetAvailableTime</servlet-name>
+		<url-pattern>/getavailabletime</url-pattern>
+	</servlet-mapping>
 </web-app>

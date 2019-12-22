@@ -4,8 +4,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
 
+import poj.Place;
+import poj.Subject;
 import poj.Teacher;
 import poj.Teacher_Subject;
+import poj.Time;
 
 public class TSDAO {
 	public static Teacher_Subject getTSObj(int TS_id) {        
@@ -30,10 +33,34 @@ public class TSDAO {
 		sf.close();
 		
 	}
+	public static void addTS(int tid, int sid, int timeid, int placeid) {        
+		SessionFactory sf=new Configuration().configure().buildSessionFactory();
+		Session s=sf.openSession();
+		s.beginTransaction();
+		
+		Teacher teacher=TeacherDAO.getTeacherObj(tid);
+		Subject subject=SubjectDAO.getSubjectObj(sid);
+		Time time=TimeDAO.getTimeObj(timeid);
+		Place place=PlaceDAO.getPlaceObj(placeid);
+		
+		Teacher_Subject ts=new Teacher_Subject();
+		ts.setTeacher(teacher);
+		ts.setSubject(subject);
+		ts.setTime(time);
+		ts.setPlace(place);
+		
+		s.save(ts);
+		
+		s.getTransaction().commit();
+		s.close();
+		sf.close();
+		
+	}
+	
 		
 	
 	public static void main(String[] args) {
-		Teacher teacher=TeacherDAO.getTeacherObj(10002);
-		//TSDAO.updateTS(13, teacher);
+		addTS(10001, 2, 7, 361);
+		System.out.println("Ìí¼Ó³É¹¦");
 	}
 }

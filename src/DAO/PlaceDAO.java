@@ -1,5 +1,6 @@
 package DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SQLQuery;
@@ -8,6 +9,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
 
 import poj.Place;
+import poj.Teacher;
+import poj.Time;
 
 public class PlaceDAO {
 	public static Place getPlaceObj(int placeid) {
@@ -62,4 +65,36 @@ public class PlaceDAO {
 		sf.close();
 		return p;
 	}	
+	public static List<Place> getAvailablePlace(Time time) {
+		SessionFactory sf=new Configuration().configure().buildSessionFactory();
+		Session s=sf.openSession();
+		s.beginTransaction();
+		
+		String sql="select * from place a where a.id not in(select placeid from teacher_subject where timeid=:timeid)";
+		SQLQuery query=s.createSQLQuery(sql);
+		query.setParameter("timeid", time.getId());
+		
+		List<Object[]> list=query.list();
+		List<Place> places=new ArrayList<Place>();
+		
+		Place p;
+		for(Object[] item:list){
+			p=new Place();
+			p.setId((int)item[0]);
+			p.setPosition((String)item[1]);
+			places.add(p);
+		}
+		
+		s.getTransaction().commit();
+		s.close();
+		sf.close();
+		return places;
+	}
+	public static void main(String[] args) {
+		Time time=TimeDAO.getTimeObj(7);
+		List<Place> list=getAvailablePlace(time);
+		for(Place place:list){
+			System.out.println(place.getPosition());
+		}
+	}
 }
