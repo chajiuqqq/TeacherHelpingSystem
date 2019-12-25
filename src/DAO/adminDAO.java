@@ -94,7 +94,8 @@ public class adminDAO {
 		
 		for(int i:list){
 			Teacher t=(Teacher)s.get(Teacher.class, i);
-			teachers.add(t);
+			if(!teachers.contains(t))
+				teachers.add(t);
 		}
 		
 		s.getTransaction().commit();

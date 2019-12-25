@@ -16,6 +16,9 @@
 <script src="https://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
 
 	<style>
+		body{
+			background-image:url(admin_bg.png);
+		}
 		#select_div{
 			width:500px;
 			padding:20px;

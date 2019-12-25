@@ -15,6 +15,7 @@ public class Checkout extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		req.getSession().removeAttribute("current_teacher");
+		req.getSession().removeAttribute("login_flag");
 		res.sendRedirect("login.jsp");
 		
 	}

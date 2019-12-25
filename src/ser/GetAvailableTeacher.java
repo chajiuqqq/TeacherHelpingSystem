@@ -21,7 +21,13 @@ public class GetAvailableTeacher extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		req.setCharacterEncoding("UTF-8");
-		int ts_id=Integer.parseInt(req.getParameter("TS_id"));
+		int ts_id=-1;
+		try{
+			ts_id=Integer.parseInt(req.getParameter("TS_id"));	
+		}catch(Exception e){
+			
+		}
+		
 		List<Teacher> teachers=adminDAO.get_available_teacher(ts_id);
 		
 		List<Simple_Teacher> simple_Teachers=new ArrayList<Simple_Teacher>();

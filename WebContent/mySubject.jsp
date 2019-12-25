@@ -19,10 +19,6 @@
          margin-left:40px;
          margin-top:10px;
      }
-     #distance{
-         margin-left:40px;
-         margin-top:10px;
-     }
      div#table{
          display:inline-block;
          margin-top:30px;
@@ -33,21 +29,16 @@
         text-align:center;
          font-size:larger;
          font-weight:bolder;
+         
      }
      td{
-	         text-align:center;
-	         min-width:20px;
-			white-space:pre-line;
-			text-align:center;
-			width:100px;
-			height:80px;
+         text-align:center;
+         min-width:20px;
+		white-space:pre-line;
+		text-align:center;
+		width:100px;
+		height:80px;
      }
-     .h{
-         height:70px;
-         vertical-align:text-top;
-         background-color:#006400;
-     }
-     
 	#div_available_teacher{
 		width:200px;
 		border:blue solid 1px;
@@ -60,10 +51,32 @@
 	}
 	
 	#teacher_img{
-		float:right;
+		
 		width:50px;
-		margin-right:10px;
-		margin-top:5px
+		
+	}
+	.li_timg{
+		padding-top:10px;
+		margin-left:700px;
+	}
+	#below{
+		position:absolute;
+		right:200px;
+		display:none;
+		
+	}
+	
+	.subject_left{
+		background-color:#00BFFF;
+		color:white;
+	}
+	
+	body{
+	background-image:url(ts_bg2.jpg);
+		padding-bottom:10em;
+		background-repeat:no-repeat;
+        background-size:100% 100%;
+        -moz-background-size:100% 100%;
 	}
     </style>
     <script>
@@ -78,21 +91,19 @@
 	}
     </script>
 </head>
-<body style="background-image:url(ts_bg2.jpg);padding-bottom:10em;">
+
+<body>
     <div id="top">
         <ul class="nav nav-tabs">
 			  <li role="presentation" class="distance"><a href="index.jsp">首页</a></li>
-			  <li role="presentation" class="active" id="distance"><a href="#">我的课表</a></li>
-			  <li role="presentation" class="distance"><a href="History.html">历史代课记录</a></li>
-			  <li role="presentation" class="distance" data-toggle="modal" data-target="#myModal">
-			  		<a href="#"  id="message_btn" >新的消息<span class="badge">3</span></a>
+			  <li role="presentation" class="active distance"><a href="#">我的课表</a></li>
+			  <li role="presentation" class="distance" data-toggle="modal" data-target="#myModal"><a href="#">新的消息<span class="badge">3</span></a>
+			  <li role="presentation" class="li_timg">
+					  <img id="teacher_img" src="teacher2.jpg" class="img-circle" onmousemove="move()" onmouseout="move2()">
 			  </li>
-			  <li role="presentation" style="margin-right:20px;margin-left:420px">
-		  			<img id="teacher_img" src="teacher2.jpg" class="img-circle" onmousemove="move()" onmouseout="move2()">
-  			   </li>
-        </ul>
-        <div id="below" style="margin-left:948px;display:none;margin-top:0px;position:absolute" onmousemove="move()" onmouseout="move2()">
-            <button type="button" class="btn btn-default" >个人中心</button>
+      	</ul>
+        <div id="below"  onmousemove="move()" onmouseout="move2()">
+           <a href="myCenter.jsp" ><button type="button" class="btn btn-default" >个人中心</button></a>
         </div>
     </div>
   
@@ -105,7 +116,6 @@
 	$('#btn_checkout').click(function(){
 		location.assign('checkout');
 	});
-
 </script>
 
 
@@ -115,11 +125,12 @@
 				"getmessage",
 				function(data){
 					var messages=$.parseJSON(data);
-					var str="<table>";
+					var str="<table class='table table-striped table-bordered table-hover  table-condensed'>";
 					str+="<tr><td>申请人</td>";
 					str+="<td>课程名称</td>";
 					str+="<td>上课时间</td>";
-					str+="<td>上课地点</td></tr>";
+					str+="<td>上课地点</td>";
+					str+="<td colspan='2'>操作</td></tr>";
 					console.log(messages);
 					for(i in messages){
 						//console.log(i+" "+messages[i]);
@@ -161,17 +172,29 @@
 		});
 		
 		
-		
+
+	
 		
 		
 	});
+
+</script>
+
+<script>
+	$(function(){
+		$('#table_title').children().css('color','white');
+		
+	});
+
 
 </script>
 <br/>
  <!--7行7列-->
     <div id="table" >
      <table class="table table-striped table-bordered table-hover  table-condensed">
-         <tr class="h" >
+         <tr style="height:50px;
+         vertical-align:middle;
+         background-color:#FFC0CB;" id="table_title">
              <td>节次/周次</td>
              <td>星期日</td>
              <td>星期一</td>
@@ -182,7 +205,7 @@
              <td>星期六</td>
          </tr>
          <tr>
-         	<td>第一节课</td>
+         	<td class="subject_left">第一节课</td>
 			<td id="Sun_1"></td>
 			<td id="Mon_1"></td>
 			<td id="Tues_1"></td>
@@ -193,7 +216,7 @@
 		</tr>
 	
 		<tr>
-			<td>第二节课</td>
+			<td class="subject_left">第二节课</td>
 			<td id="Sun_2"></td>
 			<td id="Mon_2"></td>
 			<td id="Tues_2"></td>
@@ -202,12 +225,9 @@
 			<td id="Fri_2"></td>
 			<td id="Sat_2"></td>
 		</tr>
-		<tr>
-			<td colspan="8">中午</td>
-		</tr>
 		
 		<tr>
-			<td>第三节课</td>
+			<td class="subject_left">第三节课</td>
 			<td id="Sun_3"></td>
 			<td id="Mon_3"></td>
 			<td id="Tues_3"></td>
@@ -217,7 +237,7 @@
 			<td id="Sat_3"></td>
 		</tr>
 		<tr>
-			<td>第四节课</td>
+			<td class="subject_left">第四节课</td>
 			<td id="Sun_4"></td>
 			<td id="Mon_4"></td>
 			<td id="Tues_4"></td>
@@ -227,7 +247,7 @@
 			<td id="Sat_4"></td>
 		</tr>
 		<tr>
-			<td>第五节课</td>
+			<td class="subject_left">第五节课</td>
 			<td id="Sun_5"></td>
 			<td id="Mon_5"></td>
 			<td id="Tues_5"></td>
@@ -237,7 +257,7 @@
 			<td id="Sat_5"></td>
 		</tr>
 		<tr>
-			<td>第六节课</td>
+			<td class="subject_left">第六节课</td>
 			<td id="Sun_6"></td>
 			<td id="Mon_6"></td>
 			<td id="Tues_6"></td>
@@ -273,8 +293,8 @@
 </script>
 
 
-<div id="div_available_teacher">
-<table id="table_available_teacher">
+<div id="div_available_teacher" >
+<table id="table_available_teacher" >
 
 
 </table>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>登录</title>
+<title>个人中心</title>
 
 <script src="https://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
 <link href="https://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
@@ -15,40 +15,49 @@
     <!--上述代码是为了实现PC端自适应屏幕-->
     <!--px要改为em，最好用%-->
      <style>
-        div.item img{
-    width:100%;
-   }
-  div#carousel-example-generic{
-    width:80%;
-    margin:0 auto;
-  }
-     .distance{
+		body{
+			background-image:url(ts_bg2.jpg);
+			padding-bottom:10em;
+			background-repeat:no-repeat;
+	        background-size:100% 100%;
+	        -moz-background-size:100% 100%;
+		}
+		
+		
+		#teacher_img{
+		
+			width:50px;
+		
+		}
+		.li_timg{
+			padding-top:10px;
+			margin-left:700px;
+		}
+		#below{
+			position:absolute;
+			right:200px;
+			display:none;
+			
+		}
+		
+		.distance{
          margin-left:40px;
-         margin-top:10px
-     }
-     
-	#teacher_img{
+         margin-top:10px;
+     	}
+     	.main_div{
+     		width:50%;
+     		margin:0 auto;
+     	}
+     	.title_div{
+     		width:100%;
+     	}
+     	.main_table{
+     		width:100%;
+     	}
 		
-		width:50px;
 		
-	}
-	.li_timg{
-		padding-top:10px;
-		margin-left:700px;
-	}
-	#below{
-		position:absolute;
-		right:200px;
-		display:none;
-		
-	}
-	body{
-		background-image:url(main4.jpg);
-		padding-bottom:10em;
-		background-repeat:no-repeat;
-        background-size:100% 100%;
-        -moz-background-size:100% 100%;
-	}
+	
+	
 	
     </style>
     <script>
@@ -66,7 +75,7 @@
 <body>
     <div id="top">
         <ul class="nav nav-tabs">
-			  <li role="presentation" class="active distance"><a href="#">首页</a></li>
+			  <li role="presentation" class="distance"><a href="index.jsp">首页</a></li>
 			  <li role="presentation" class="distance"><a href="mySubject.jsp">我的课表</a></li>
 			  <li role="presentation" class="distance" data-toggle="modal" data-target="#myModal"><a href="#">新的消息<span class="badge">3</span></a>
 			  <li role="presentation" class="li_timg">
@@ -86,52 +95,94 @@
     <li data-target="#carousel-example-generic" data-slide-to="2"></li>
   </ol>
 
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <img src="school1.jpg" >
-    </div>
-    <div class="item">
-            <img src="school3.jpg" >
-    </div>
-    <div class="item">
-            <img src="school4.jpg" >
-    </div>
-  </div>
-
-  <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-
-  </a>
-  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-
-  </a>
-
-</div>
-    
-    <br />
-    <div class="text-primary" style="text-align:center;font-size:larger;font-weight:bolder"><span>代课系统是便利老师的一个非常好的系统，
-        希望各位老师可以登录此平台，互惠互利</span><span class="glyphicon glyphicon-education"></span>
-        <span class="glyphicon glyphicon-education"></span><span class="glyphicon glyphicon-education"></span>
-    </div>
+  
      
     
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-<div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">请求</h4>
-          </div>
-          
-          
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog">
+	        <div class="modal-content">
+		          <div class="modal-header">
+			            <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			            <h4 class="modal-title">请求</h4>
+		          </div>
+	        </div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
 </div>
 
-<div style="height:200px"></div>
+
+<div class="title_div">
+	<h2>个人中心</h2>
+	<hr style="border-top:5px solid slategrey;margin-top:1px;"/>
+
+</div>
+
+<div class="main_div">
+	<form>
+		<table class="main_table">
+			<tr>
+				<td>
+					姓名：<input type="text" id="name" name="name" value="${current_teacher.name}" class="form-control">
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					用户名：<input type="text" id="username" name="username" value="${current_teacher.username}" class="form-control">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					密码：<input type="text"  id="password" name="password" value="${current_teacher.password}" class="form-control">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					工号：<input type="text" id="tno"  name="tno" value="${current_teacher.tno}" class="form-control input_tno" disabled="disabled">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button id="btn_submit" class="form-control">提交更改</button>
+				</td>
+			</tr>
+		
+		</table>
+	</form>
+
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		
+		
+		$('#btn_submit').click(function(){
+			var val={"name":$('#name').val(),"username":$('#username').val(),"password":$('#password').val(),"tno":$('#tno').val()}
+			$.post(
+				"updateTeacher",
+				val
+			);
+			alert('修改成功!');
+			location.reload();
+		
+		});
+		
+		
+	});
+	
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
 
 
 

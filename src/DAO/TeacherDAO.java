@@ -9,6 +9,7 @@ import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
+import org.w3c.dom.events.EventException;
 
 import javassist.compiler.ast.Pair;
 import poj.Subject;
@@ -55,9 +56,14 @@ public class TeacherDAO {
 		SQLQuery query=s.createSQLQuery(sql);
 		query.setParameter("username", username);
 		query.setParameter("password", password);
-	
+		Teacher teacher;
 		List<Object[]> list=query.list();
-		Teacher teacher=(Teacher)s.get(Teacher.class, (int)list.get(0)[0]);
+		try{
+			teacher=(Teacher)s.get(Teacher.class, (int)list.get(0)[0]);	
+		}catch(Exception e){
+			teacher=null;
+		}
+		
 		
 		
 		s.getTransaction().commit();
@@ -79,14 +85,28 @@ public class TeacherDAO {
 		sf.close();
 		return list;
 	}
-	
+	public static void updateTeacher(Teacher t) {
+		SessionFactory sf=new Configuration().configure().buildSessionFactory();
+		Session s=sf.openSession();
+		s.beginTransaction();
+		//Teacher teacher=(Teacher)s.get(Teacher.class, t.getTno());
+		s.update(t);
+		s.getTransaction().commit();
+		s.close();
+		sf.close();
+	}
 	
 	public static void main(String[] args) {
-		List<Teacher> list=getTeachers();
-		for(Teacher t:list){
-			System.out.println(t.getName());
-		}
-		
+//		List<Teacher> list=getTeachers();
+//		for(Teacher t:list){
+//			System.out.println(t.getName());
+//		}
+		Teacher t=new Teacher();
+		t.setTno(10005);
+		t.setName("sorry_zyy");
+		t.setUsername("zyy");
+		t.setPassword("999");
+		updateTeacher(t);
 		
 	}
 }
