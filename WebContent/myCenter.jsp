@@ -20,7 +20,7 @@
 			padding-bottom:10em;
 			background-repeat:no-repeat;
 	        background-size:100% 100%;
-	        -moz-background-size:100% 100%;
+	        
 		}
 		
 		
@@ -44,15 +44,22 @@
          margin-left:40px;
          margin-top:10px;
      	}
+     	
      	.main_div{
-     		width:50%;
+     		width:100%;
+     		
+     	}
+     	
+     	.title_div{
+     		width:55%;
+     		
      		margin:0 auto;
      	}
-     	.title_div{
-     		width:100%;
-     	}
+     	
      	.main_table{
-     		width:100%;
+     		width:40%;
+     		
+     		margin:0 auto;
      	}
 		
 		
@@ -86,16 +93,7 @@
            <a href="myCenter.jsp" ><button type="button" class="btn btn-default" >个人中心</button></a>
         </div>
     </div>
-    
-  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="margin-top:50px;width:850px">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-  </ol>
-
-  
+   
      
     
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -112,7 +110,7 @@
 
 <div class="title_div">
 	<h2>个人中心</h2>
-	<hr style="border-top:5px solid slategrey;margin-top:1px;"/>
+	<hr style="border-top:5px solid slategrey;margin-top:1px; width:100%"/>
 
 </div>
 
@@ -141,8 +139,9 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
-					<button id="btn_submit" class="form-control">提交更改</button>
+				<td style="padding-top:10px;">
+				
+					<button id="btn_submit" class="btn btn-primary">提交更改</button>
 				</td>
 			</tr>
 		
@@ -172,18 +171,6 @@
 
 
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </body>

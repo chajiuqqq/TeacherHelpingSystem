@@ -102,12 +102,12 @@
 
 <script>
 	$(function(){
-		$('#select_teacher,#select_subject').change(function(){
+		$('#select_subject,#select_teacher').change(function(){
 			$('#select_time').empty();
 			$('#select_time').append("<option>请选择时间</option>");
 			$('#select_place').empty();
 			$('#select_place').append("<option>请选择地点</option>");
-			var tid=$(this).val();
+			var tid=$('#select_teacher').val();
 			$.get(
 				"getavailabletime?tid="+tid,
 				function(data){
@@ -160,6 +160,7 @@
 				alert("信息选择有误!");
 				return;
 			}else{
+				console.log("tid: "+tid+"sid: "+sid+"timeid: "+timeid+"placeid: "+placeid);
 				$.get(
 					"dealaddTS",
 					{"tid":tid,"sid":sid,"timeid":timeid,"placeid":placeid}

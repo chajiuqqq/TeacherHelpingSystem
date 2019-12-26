@@ -19,19 +19,16 @@
          margin-left:40px;
          margin-top:10px;
      }
-     div#table{
-         display:inline-block;
-         margin-top:30px;
-         width:80%;
-         margin-left:10%;
-     }
-     table{
+     
+     #main_table_div table{
         text-align:center;
          font-size:larger;
          font-weight:bolder;
+         width:1000px;
+         margin-left:150px;
          
      }
-     td{
+     #main_table_div td{
          text-align:center;
          min-width:20px;
 		white-space:pre-line;
@@ -46,6 +43,12 @@
 		position:absolute;
 		
 	}
+	#div_available_teacher td{
+		text-align:center;
+		width:100px;
+		height:50px;
+	}
+	
 	.btns_top{
 		float:right;
 	}
@@ -97,7 +100,7 @@
         <ul class="nav nav-tabs">
 			  <li role="presentation" class="distance"><a href="index.jsp">首页</a></li>
 			  <li role="presentation" class="active distance"><a href="#">我的课表</a></li>
-			  <li role="presentation" class="distance" data-toggle="modal" data-target="#myModal"><a href="#">新的消息<span class="badge">3</span></a>
+			  <li role="presentation" class="distance" data-toggle="modal" data-target="#myModal"><a href="#" id="myMessage">新的消息<span class="badge">3</span></a>
 			  <li role="presentation" class="li_timg">
 					  <img id="teacher_img" src="teacher2.jpg" class="img-circle" onmousemove="move()" onmouseout="move2()">
 			  </li>
@@ -121,67 +124,6 @@
 
 <script>
 	$(function(){
-		$.get(
-				"getmessage",
-				function(data){
-					var messages=$.parseJSON(data);
-					var str="<table class='table table-striped table-bordered table-hover  table-condensed'>";
-					str+="<tr><td>申请人</td>";
-					str+="<td>课程名称</td>";
-					str+="<td>上课时间</td>";
-					str+="<td>上课地点</td>";
-					str+="<td colspan='2'>操作</td></tr>";
-					console.log(messages);
-					for(i in messages){
-						//console.log(i+" "+messages[i]);
-						str+="<tr>";
-						str+="<td>"+ messages[i].tName+"</td>";
-						str+="<td>"+ messages[i].sName+"</td>";
-						str+="<td>"+ messages[i].period+"</td>";
-						str+="<td>"+ messages[i].position+"</td>";
-						str+="<td><button message_id='"+ i +"' ans='true' class='btn btn-info'>同意</button></td>";
-						str+="<td><button message_id='"+ i +"' ans='false' class='btn btn-default'>拒绝</button></td>";
-						str+="</tr>";
-					}
-					str+="</tr></table>";
-					$('#message_table').append(str);
-				}
-			);
-		
-		$('#message_table').hide();
-		$('#message_btn').click(function(){
-			$('#message_table').slideToggle(500);
-		});
-		
-		$('#message_table').delegate('button',"click",function(){
-			var message_id=$(this).attr('message_id');
-			
-			var ans=$(this).attr('ans');
-			console.log("ans: "+ans);
-			$.get(
-				"dealmessage",
-				{"message_id":message_id,"ans":ans}
-			);
-
-			$('button[message_id='+message_id+']').attr('disabled','disabled');
-			alert('操作成功!');
-			
-			if(ans=='true'){
-				$('#btn_refresh').trigger('click');
-			}
-		});
-		
-		
-
-	
-		
-		
-	});
-
-</script>
-
-<script>
-	$(function(){
 		$('#table_title').children().css('color','white');
 		
 	});
@@ -190,7 +132,7 @@
 </script>
 <br/>
  <!--7行7列-->
-    <div id="table" >
+    <div id="main_table_div" >
      <table class="table table-striped table-bordered table-hover  table-condensed">
          <tr style="height:50px;
          vertical-align:middle;
@@ -270,6 +212,7 @@
     </div>
 
 
+<!-- 刷新按钮脚本 -->
 <script>
 	$(function(){
 		$("#btn_refresh").click(function(){
@@ -293,8 +236,10 @@
 </script>
 
 
+
+<!-- 可用老师div设置 -->
 <div id="div_available_teacher" >
-<table id="table_available_teacher" >
+<table id="table_available_teacher" class="table table-striped table-bordered table-hover  table-condensed">
 
 
 </table>
@@ -372,7 +317,7 @@
 
 
 
-
+<!-- 我的消息设置 -->
 
      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 <div class="modal-dialog">
@@ -382,7 +327,7 @@
 		            <h4 class="modal-title">请求</h4>
 	          </div>
 	          <div class="modal-body">
-		          <p id="message_table"></p>
+		          <div id="message_table"></div>
 	          </div>
 	          
         </div><!-- /.modal-content -->
@@ -390,6 +335,63 @@
 </div>
 
 
+
+<script>
+	$(function(){
+		$('#myMessage').click(function(){
+			$('#message_table').empty();
+			$.get(
+					"getmessage",
+					function(data){
+						var messages=$.parseJSON(data);
+						var str="<table class='table table-striped table-bordered table-hover  table-condensed'>";
+						str+="<tr><td>申请人</td>";
+						str+="<td>课程名称</td>";
+						str+="<td>上课时间</td>";
+						str+="<td>上课地点</td>";
+						str+="<td colspan='2'>操作</td></tr>";
+						console.log(messages);
+						for(i in messages){
+							//console.log(i+" "+messages[i]);
+							str+="<tr>";
+							str+="<td>"+ messages[i].tName+"</td>";
+							str+="<td>"+ messages[i].sName+"</td>";
+							str+="<td>"+ messages[i].period+"</td>";
+							str+="<td>"+ messages[i].position+"</td>";
+							str+="<td><button message_id='"+ i +"' ans='true' class='btn btn-info'>同意</button></td>";
+							str+="<td><button message_id='"+ i +"' ans='false' class='btn btn-default'>拒绝</button></td>";
+							str+="</tr>";
+						}
+						str+="</tr></table>";
+						$('#message_table').append(str);
+					}
+				);
+			
+			
+		});
+		
+		
+		
+		$('#message_table').delegate('button',"click",function(){
+			var message_id=$(this).attr('message_id');
+			
+			var ans=$(this).attr('ans');
+			console.log("ans: "+ans);
+			$.get(
+				"dealmessage",
+				{"message_id":message_id,"ans":ans}
+			);
+
+			$('button[message_id='+message_id+']').attr('disabled','disabled');
+			alert('操作成功!');
+			
+			if(ans=='true'){
+				$('#btn_refresh').trigger('click');
+			}
+		});
+	});
+
+</script>
 <div style="height:200px"></div>
 
 </body>

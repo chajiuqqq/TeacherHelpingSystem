@@ -49,6 +49,15 @@
         background-size:100% 100%;
         -moz-background-size:100% 100%;
 	}
+	.tip_div{
+		text-align:center;
+		font-size:larger;
+		font-weight:bolder;
+		
+	}
+	.tip{
+		background-color:#E6E6FA;
+	}
 	
     </style>
     <script>
@@ -68,7 +77,7 @@
         <ul class="nav nav-tabs">
 			  <li role="presentation" class="active distance"><a href="#">首页</a></li>
 			  <li role="presentation" class="distance"><a href="mySubject.jsp">我的课表</a></li>
-			  <li role="presentation" class="distance" data-toggle="modal" data-target="#myModal"><a href="#">新的消息<span class="badge">3</span></a>
+			  <li role="presentation" class="distance" data-toggle="modal" data-target="#myModal"><a href="#" id="myMessage">新的消息<span class="badge">3</span></a>
 			  <li role="presentation" class="li_timg">
 					  <img id="teacher_img" src="teacher2.jpg" class="img-circle" onmousemove="move()" onmouseout="move2()">
 			  </li>
@@ -112,25 +121,91 @@
 </div>
     
     <br />
-    <div class="text-primary" style="text-align:center;font-size:larger;font-weight:bolder"><span>代课系统是便利老师的一个非常好的系统，
-        希望各位老师可以登录此平台，互惠互利</span><span class="glyphicon glyphicon-education"></span>
-        <span class="glyphicon glyphicon-education"></span><span class="glyphicon glyphicon-education"></span>
+    <div class="text-primary tip_div" >
+	    <span class="tip">
+	    	<span >代课系统是便利老师的一个非常好的系统， 希望各位老师可以登录此平台，互惠互利</span>
+	    	<span class="glyphicon glyphicon-education "></span> 
+	    	<span class="glyphicon glyphicon-education "></span>
+	    	<span class="glyphicon glyphicon-education "></span>
+	    </span>
     </div>
      
-    
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+
+
+     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
-            <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">请求</h4>
-          </div>
-          
-          
+	          <div class="modal-header">
+		            <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+		            <h4 class="modal-title">请求</h4>
+	          </div>
+	          <div class="modal-body">
+		          <div id="message_table"></div>
+	          </div>
+	          
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
 </div>
 
+
+
+<script>
+	$(function(){
+		$('#myMessage').click(function(){
+			$('#message_table').empty();
+			$.get(
+					"getmessage",
+					function(data){
+						var messages=$.parseJSON(data);
+						var str="<table class='table table-striped table-bordered table-hover  table-condensed'>";
+						str+="<tr><td>申请人</td>";
+						str+="<td>课程名称</td>";
+						str+="<td>上课时间</td>";
+						str+="<td>上课地点</td>";
+						str+="<td colspan='2'>操作</td></tr>";
+						console.log(messages);
+						for(i in messages){
+							//console.log(i+" "+messages[i]);
+							str+="<tr>";
+							str+="<td>"+ messages[i].tName+"</td>";
+							str+="<td>"+ messages[i].sName+"</td>";
+							str+="<td>"+ messages[i].period+"</td>";
+							str+="<td>"+ messages[i].position+"</td>";
+							str+="<td><button message_id='"+ i +"' ans='true' class='btn btn-info'>同意</button></td>";
+							str+="<td><button message_id='"+ i +"' ans='false' class='btn btn-default'>拒绝</button></td>";
+							str+="</tr>";
+						}
+						str+="</tr></table>";
+						$('#message_table').append(str);
+					}
+				);
+			
+			
+		});
+		
+		
+		
+		$('#message_table').delegate('button',"click",function(){
+			var message_id=$(this).attr('message_id');
+			
+			var ans=$(this).attr('ans');
+			console.log("ans: "+ans);
+			$.get(
+				"dealmessage",
+				{"message_id":message_id,"ans":ans}
+			);
+
+			$('button[message_id='+message_id+']').attr('disabled','disabled');
+			alert('操作成功!');
+			
+			if(ans=='true'){
+				$('#btn_refresh').trigger('click');
+			}
+		});
+	});
+
+</script>
 <div style="height:200px"></div>
 
 

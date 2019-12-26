@@ -1,5 +1,6 @@
 package DAO;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
@@ -39,9 +40,16 @@ public class TSDAO {
 		s.beginTransaction();
 		
 		Teacher teacher=TeacherDAO.getTeacherObj(tid);
+//		System.out.println(teacher.getName());
+		
 		Subject subject=SubjectDAO.getSubjectObj(sid);
+//		System.out.println(subject.getName());
+		
 		Time time=TimeDAO.getTimeObj(timeid);
+//		System.out.println(time.getPeriod());
+		
 		Place place=PlaceDAO.getPlaceObj(placeid);
+//		System.out.println(place.getPosition());
 		
 		Teacher_Subject ts=new Teacher_Subject();
 		ts.setTeacher(teacher);
@@ -50,6 +58,17 @@ public class TSDAO {
 		ts.setPlace(place);
 		
 		s.save(ts);
+		
+//		==========================
+//		String sql="insert into teacher_subject values(null,:tid,:sid,:timeid,:placeid)";
+//		SQLQuery sqlQuery=s.createSQLQuery(sql);
+//		sqlQuery.setParameter("tid", tid);
+//		sqlQuery.setParameter("sid", sid);
+//		sqlQuery.setParameter("timeid", timeid);
+//		sqlQuery.setParameter("placeid", placeid);
+//		
+//		sqlQuery.executeUpdate();
+		
 		
 		s.getTransaction().commit();
 		s.close();
@@ -60,7 +79,7 @@ public class TSDAO {
 		
 	
 	public static void main(String[] args) {
-		addTS(10001, 2, 7, 361);
+		addTS(100030, 2, 7, 361);
 		System.out.println("Ìí¼Ó³É¹¦");
 	}
 }
